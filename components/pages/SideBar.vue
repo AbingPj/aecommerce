@@ -69,9 +69,18 @@
           </li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th" />
+            <i class="nav-icon fas fa-th" />
               <p>
                 Widgets
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a @click="logout()" class="nav-link">
+              <i class="fas fa-sign-out-alt nav-icon"></i>
+              <p>
+                Logout
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
@@ -565,3 +574,14 @@
     <!-- /.sidebar -->
   </aside>
 </template>
+
+<script>
+export default {
+  methods: {
+        logout(){
+            this.$parent.logout()
+        }
+  }
+}
+</script>
+

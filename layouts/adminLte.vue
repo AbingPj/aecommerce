@@ -14,6 +14,12 @@ import Footer from '../components/pages/Footer'
 export default {
   components: {
     NavBar, SideBar, Footer
+  },
+  methods: {
+        logout(){
+            console.log('hello');
+            this.$router.push('/login')
+        }
   }
 }
 </script>
