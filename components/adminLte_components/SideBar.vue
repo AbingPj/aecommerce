@@ -2,7 +2,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a @click="dashboard()" class="brand-link text-light">
       <img
         src="/dist/img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -24,7 +24,7 @@
           >
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a class="d-block">Admin</a>
         </div>
       </div>
 
@@ -36,19 +36,35 @@
           role="menu"
           data-accordion="false"
         >
+         <li class="nav-item">
+            <a @click="dashboard()" class="nav-link">
+            <i class="nav-icon fas fa-th" />
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a @click="categories()" class="nav-link">
+            <i class="nav-icon fas fa-th" />
+              <p>
+                Categories
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a @click="prducts()" class="nav-link">
             <i class="nav-icon fas fa-th" />
               <p>
                 Products
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+           <li class="nav-item">
+            <a @click="users()" class="nav-link">
             <i class="nav-icon fas fa-th" />
               <p>
-                Categories
+                Users
               </p>
             </a>
           </li>
@@ -71,11 +87,20 @@
 <script>
 export default {
   methods: {
+        dashboard(){
+          this.$parent.dashboard()
+        },
+        categories(){
+          this.$parent.categories()
+        },
         prducts(){
-           this.$router.push('/products')
+          this.$parent.products()
+        },
+        users(){
+          this.$parent.users()
         },
         logout(){
-            this.$parent.logout()
+          this.$parent.logout()
         }
   }
 }

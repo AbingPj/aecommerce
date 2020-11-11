@@ -16,9 +16,21 @@ export default {
     NavBar, SideBar, Footer
   },
   methods: {
+        dashboard(){
+           this.$router.push('/admin')
+        },
+        categories(){
+           this.$router.push('/admin/categories')
+        },
+        products(){
+           this.$router.push('/admin/products')
+        },
+        users(){
+           this.$router.push('/admin/users')
+        },
         logout(){
             console.log('hello');
-            this.$router.push('/login')
+            this.$router.push('/')
         }
   }
 }

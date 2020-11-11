@@ -53,7 +53,12 @@ export default {
     methods:{
         login(){
             console.log('hello');
-            this.$router.push('/admin')
+            if(this.email === 'admin@admin.com'){
+              this.$router.push('/admin')
+            }else{
+               this.$router.push('/profile')
+            }
+
         }
     }
 }
