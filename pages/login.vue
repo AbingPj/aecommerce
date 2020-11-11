@@ -8,7 +8,7 @@
       <div class="card">
          <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-           
+
                <div class="input-group mb-3">
                   <input v-model="email" type="email" class="form-control" placeholder="Email">
                   <div class="input-group-append">
@@ -26,14 +26,14 @@
                   </div>
                </div>
                <div class="row">
-                 
+
                   <!-- /.col -->
                   <div class="col-12">
                      <button @click="login" type="submit" class="btn btn-primary btn-block">Sign In</button>
                   </div>
                   <!-- /.col -->
                </div>
-            
+
          </div>
          <!-- /.login-card-body -->
       </div>
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-    layout:'none',
+    layout:'customer',
     data(){
         return{
             email:'',
@@ -53,7 +53,7 @@ export default {
     methods:{
         login(){
             console.log('hello');
-            this.$router.push('/dashboard')
+            this.$router.push('/admin')
         }
     }
 }
@@ -61,7 +61,7 @@ export default {
 
 <style>
 #loginBox {
-  position: fixed; 
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
