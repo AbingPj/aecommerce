@@ -15,16 +15,11 @@ export const mutations = {
 };
 
 export const actions = {
-  setToken({commit}, {token, expiresIn}) {
+  setToken({commit}, {token}) {
     this.$axios.setToken(token, 'Bearer');
-    const expiryTime = new Date(new Date().getTime() + expiresIn * 1000);
+    const expiryTime = new Date(new Date().getTime() + 86400 * 1000);
     cookies.set('x-access-token', token, {expires: expiryTime});
     commit('SET_TOKEN', token);
-  },
-
-  async refreshToken({dispatch}) {
-    const {token, expiresIn} = await this.$axios.$post('refresh-token');
-    dispatch('setToken', {token, expiresIn});
   },
 
   logout({commit}) {

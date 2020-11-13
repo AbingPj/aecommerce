@@ -1,32 +1,43 @@
 <template>
-  <div class="container">
-    <b-form @submit.prevent="login">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
+   <div id="loginBox">
+       <div class="login-box">
+      <div class="login-logo">
+         <a href="#"><b>Davao</b>Ecommerce</a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+         <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
 
-      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          type="password"
-          v-model="form.password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
+               <div class="input-group mb-3">
+                  <input v-model="form.email" type="email" class="form-control" placeholder="Email">
+                  <div class="input-group-append">
+                     <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                     </div>
+                  </div>
+               </div>
+               <div class="input-group mb-3">
+                  <input v-model="form.password" type="password" class="form-control" placeholder="Password">
+                  <div class="input-group-append">
+                     <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-    </b-form>
+                  <!-- /.col -->
+                  <div class="col-12">
+                     <button @click="login" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                  </div>
+                  <!-- /.col -->
+               </div>
+
+         </div>
+         <!-- /.login-card-body -->
+      </div>
+   </div>
   </div>
 </template>
 
@@ -45,11 +56,9 @@
       login() {
         this.$axios.$post('/api/login', this.form)
           .then((res) => {
-            let expire = 86400;
             let token = res.data.token;
-            console.log(res.data);
-            this.$store.dispatch('setToken', {token, expire});
-            this.$router.push({name: 'secret'});
+            this.$store.dispatch('setToken', {token});
+            this.$router.push('/admin')
           })
           .catch(errors => {
             console.dir(errors);

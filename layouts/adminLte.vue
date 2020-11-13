@@ -12,6 +12,7 @@ import NavBar from '../components/adminLte_components/NavBar'
 import SideBar from '../components/adminLte_components/SideBar'
 import Footer from '../components/adminLte_components/Footer'
 export default {
+  middleware: 'auth',
   components: {
     NavBar, SideBar, Footer
   },
@@ -29,7 +30,7 @@ export default {
            this.$router.push('/admin/users')
         },
         logout(){
-            console.log('hello');
+            this.$store.dispatch('logout');
             this.$router.push('/')
         }
   }
