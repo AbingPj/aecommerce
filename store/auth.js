@@ -2,6 +2,7 @@ import cookies from 'js-cookie';
 
 export const state = () => ({
   token: null,
+  role: null,
 });
 
 export const mutations = {
