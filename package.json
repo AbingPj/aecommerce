@@ -1,26 +1,20 @@
 {
-  "name": "nuxtjs-adminlte-101",
+  "name": "davao-ecommerce",
   "version": "1.0.0",
-  "description": "Nuxt.js + AdminLTE",
-  "author": "Prathompong Prasert",
+  "author": "Abing + Vince",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .eslintignore ."
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/axios": "^5.12.2",
+    "core-js": "^3.6.5",
+    "js-cookie": "^2.2.1",
     "admin-lte": "3",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.14.6"
   },
-  "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^1.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2"
-  }
+  "devDependencies": {}
 }

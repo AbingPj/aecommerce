@@ -1,9 +1,10 @@
 
 export default {
-  mode: 'spa',
-  /*
-  ** Headers of the page
-  */
+  // mode: 'spa',
+  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
+  ssr: false,
+
+  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Davao Ecommerce',
     meta: [
@@ -54,39 +55,38 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-  /*
-  ** Global CSS
-  */
+
+   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
+
+  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
+
+  // Auto import components (https://go.nuxtjs.dev/config-components)
+  components: true,
+
+  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     // '@nuxtjs/eslint-module'
   ],
-  /*
-  ** Nuxt.js modules
-  */
+
+  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    // https://go.nuxtjs.dev/bootstrap
+    // 'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
+
+  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
+    baseURL: 'http://deliv-api.test/web/',
   },
-  /*
-  ** Build configuration
-  */
+
+    // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     /*
     ** You can extend webpack config here
