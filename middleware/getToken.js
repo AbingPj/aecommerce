@@ -5,8 +5,9 @@ export default function ({ store, redirect }) {
   if (token) {
     console.log('naay_token')
     let expiresIn = 86400;
-    store.dispatch('setToken', {token, expiresIn});
+    store.dispatch('auth/setToken', {token, expiresIn});
   }else{
-    store.dispatch('logout');
+    console.log('walay token')
+    store.dispatch('auth/logout');
   }
 }

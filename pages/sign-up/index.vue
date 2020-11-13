@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  layout:'customer',
   methods:{
     submit()
     {

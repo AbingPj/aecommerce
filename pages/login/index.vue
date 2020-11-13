@@ -1,6 +1,6 @@
 <template>
    <div id="loginBox">
-       <div class="login-box">
+     <div class="login-box text-center">
       <div class="login-logo">
          <a href="#"><b>Davao</b>Ecommerce</a>
       </div>
@@ -38,31 +38,34 @@
          <!-- /.login-card-body -->
       </div>
    </div>
-  </div>
+   </div>
 </template>
 
 <script>
+  import { mapActions } from "vuex";
   export default {
+    layout:'customer',
     data() {
       return {
         form: {
           email: 'test@ecommerce.com',
           password: '123123123',
-          name: '',
         },
       }
     },
     methods: {
+      ...mapActions({
+         vuexlogin: "auth/login",
+      }),
       login() {
-        this.$axios.$post('/api/login', this.form)
-          .then((res) => {
-            let token = res.data.token;
-            this.$store.dispatch('setToken', {token});
-            this.$router.push('/admin')
-          })
-          .catch(errors => {
-            console.dir(errors);
-          });
+         this.vuexlogin(this.form)
+            .then((res) => {
+               console.log(res.data);
+               this.$router.push('/admin')
+            })
+            .catch((err) => {
+               console.log(err);
+            });
       },
     }
   }

@@ -11,12 +11,16 @@
 import NavBar from '../components/adminLte_components/NavBar'
 import SideBar from '../components/adminLte_components/SideBar'
 import Footer from '../components/adminLte_components/Footer'
+import { mapActions } from "vuex";
 export default {
   middleware: 'auth',
   components: {
     NavBar, SideBar, Footer
   },
   methods: {
+        ...mapActions({
+          vuexlogout: "auth/logout",
+        }),
         dashboard(){
            this.$router.push('/admin')
         },
@@ -30,7 +34,7 @@ export default {
            this.$router.push('/admin/users')
         },
         logout(){
-            this.$store.dispatch('logout');
+            this.vuexlogout('vuexlogout');
             this.$router.push('/')
         }
   }
