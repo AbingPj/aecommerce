@@ -76,15 +76,19 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/bootstrap
-    // 'bootstrap-vue/nuxt',
+    'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'http://deliv-api.test/web/',
+    baseURL: 'http://52.74.70.6:88/',
     // credentials: true, // this says that in the request the httponly cookie should be sent
+  },
+
+  router: {
+    middleware: 'refreshToken',
   },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
