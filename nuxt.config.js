@@ -84,6 +84,7 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: 'http://deliv-api.test/web/',
+    // credentials: true, // this says that in the request the httponly cookie should be sent
   },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
