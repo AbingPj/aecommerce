@@ -2,8 +2,8 @@
   <div class="text-center">
     <h1>Products</h1>
      <button @click="home()" class="btn btn-primary">Landing Page / Home</button>
-     <button @click="login()" class="btn btn-primary">Login</button>
-   <button @click="signup()" class="btn btn-danger">Sign-up</button>
+     <!-- <button @click="login()" class="btn btn-primary">Login</button>
+   <button @click="signup()" class="btn btn-danger">Sign-up</button> -->
   </div>
 </template>
 

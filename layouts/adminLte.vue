@@ -11,9 +11,9 @@
 import NavBar from '../components/adminLte_components/NavBar'
 import SideBar from '../components/adminLte_components/SideBar'
 import Footer from '../components/adminLte_components/Footer'
-import { mapActions } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
 export default {
-  middleware: 'auth',
+  middleware: 'admin',
   components: {
     NavBar, SideBar, Footer
   },
@@ -21,6 +21,9 @@ export default {
         ...mapActions({
           vuexlogout: "auth/logout",
         }),
+        home(){
+           this.$router.push('/')
+        },
         dashboard(){
            this.$router.push('/admin')
         },

@@ -3,12 +3,13 @@
     <h1>Profile Page</h1>
     <button @click="home()" class="btn btn-primary">Landing Page / HOME</button>
     <button @click="products()" class="btn btn-success">Products</button>
-    <button @click="logout()" class="btn btn-danger">Logout</button>
+    <!-- <button @click="logout()" class="btn btn-danger">Logout</button> -->
   </div>
 </template>
 
 <script>
 export default {
+  middleware: 'auth',
   layout:'customer',
   methods:{
       home()
@@ -19,10 +20,10 @@ export default {
         {
             this.$router.push('/products')
         },
-        logout()
-        {
-            this.$router.push('/')
-        }
+        // logout()
+        // {
+        //     this.$router.push('/')
+        // }
   }
 }
 </script>

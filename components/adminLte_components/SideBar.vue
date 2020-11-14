@@ -2,7 +2,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a @click="dashboard()" class="brand-link text-light">
+    <a @click="home()" class="brand-link text-light">
       <img
         src="/dist/img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -87,6 +87,9 @@
 <script>
 export default {
   methods: {
+        home() {
+           this.$parent.home()
+        },
         dashboard(){
           this.$parent.dashboard()
         },

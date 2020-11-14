@@ -11,7 +11,7 @@
         ><i class="fas fa-bars" /></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a  @click="home()" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -163,3 +163,28 @@
   </nav>
   <!-- /.navbar -->
 </template>
+
+<script>
+export default {
+  methods: {
+        home() {
+           this.$parent.home()
+        },
+        dashboard(){
+          this.$parent.dashboard()
+        },
+        categories(){
+          this.$parent.categories()
+        },
+        prducts(){
+          this.$parent.products()
+        },
+        users(){
+          this.$parent.users()
+        },
+        logout(){
+          this.$parent.logout()
+        }
+  }
+}
+</script>

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import { mapActions } from "vuex";
+  import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
   export default {
     layout:'customer',
     data() {
