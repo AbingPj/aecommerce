@@ -4,10 +4,13 @@ export default function ({ store, redirect }) {
   const token = cookies.get('x-access-token');
   if (token) {
     console.log('naay_token')
-    let expiresIn = 86400;
-    store.dispatch('auth/setToken', {token, expiresIn});
+    store.dispatch('auth/check', {token})
+    .catch(errors => {
+      console.dir(errors);
+      store.dispatch('auth/removeToken');
+    });
   }else{
     console.log('walay token')
-    store.dispatch('auth/logout');
+    store.dispatch('auth/removeToken');
   }
 }
