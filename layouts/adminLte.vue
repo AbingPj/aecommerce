@@ -17,9 +17,13 @@ export default {
   components: {
     NavBar, SideBar, Footer
   },
+  created() {
+    //  this.vuexproducts();
+  },
   methods: {
         ...mapActions({
           vuexlogout: "auth/logout",
+          // vuexproducts: "products/retrieveProducts",
         }),
         home(){
            this.$router.push('/')

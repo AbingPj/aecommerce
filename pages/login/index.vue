@@ -60,7 +60,7 @@
       login() {
          this.vuexlogin(this.form)
             .then((res) => {
-               console.log(res.data);
+              //  console.log(res.data);
                this.$router.push('/admin')
             })
             .catch((err) => {

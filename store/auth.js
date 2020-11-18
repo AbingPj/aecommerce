@@ -4,9 +4,14 @@ export const state = () => ({
   token: null,
   role_id: null,
   isLogin: false,
+  num1: 1,
+  num2: 2,
 });
 
 export const getters = {
+  getNum1Num2(state) {
+    return (state.num1 + state.num2);
+  },
   getIsLogin(state) {
     return state.isLogin;
   },
@@ -53,7 +58,7 @@ export const actions = {
       this.$axios.post('/api/login', data)
         .then(res => {
           let token = res.data.data.token;
-          console.log(token);
+          // console.log(token);
           dispatch('setToken', {token});
           commit('SET_ROLE_ID', res.data.data.role_id);
           commit('SET_LOGIN_IN');
@@ -76,6 +81,7 @@ export const actions = {
     this.$axios.setToken(token, 'Bearer');
     const expiryTime = new Date(new Date().getTime() + 86400 * 1000);
     cookies.set('x-access-token', token, {expires: expiryTime});
+    cookies.set('x-access-role_id', token, {expires: expiryTime});
     commit('SET_TOKEN', token);
     const res = await this.$axios.$get('/api/me');
     commit('SET_ROLE_ID', res.role_id);

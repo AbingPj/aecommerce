@@ -50,12 +50,15 @@ export default {
         // }),
         ...mapGetters({
             isLogin2: 'auth/getIsLogin',
-            isAdmin: 'auth/getIsAdmin'
+            isAdmin: 'auth/getIsAdmin',
+            getNum1Num2: 'auth/getNum1Num2'
         }),
     },
   methods: {
         ...mapActions({
           vuexlogout: "auth/logout",
+          getIsLogin: "auth/getIsLogin",
+          getProducts: "auth/getProducts",
         }),
         home()
         {
