@@ -37,8 +37,8 @@ export default {
         products(){
            this.$router.push('/admin/products')
         },
-        users(){
-           this.$router.push('/admin/users')
+        customers(){
+           this.$router.push('/admin/customers')
         },
         logout(){
             this.vuexlogout('vuexlogout');

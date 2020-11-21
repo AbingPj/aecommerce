@@ -61,10 +61,10 @@
             </a>
           </li>
            <li class="nav-item">
-            <a @click="users()" class="nav-link">
+            <a @click="customers()" class="nav-link">
             <i class="nav-icon fas fa-th" />
               <p>
-                Users
+                Customers
               </p>
             </a>
           </li>
@@ -99,8 +99,8 @@ export default {
         prducts(){
           this.$parent.products()
         },
-        users(){
-          this.$parent.users()
+        customers(){
+          this.$parent.customers()
         },
         logout(){
           this.$parent.logout()

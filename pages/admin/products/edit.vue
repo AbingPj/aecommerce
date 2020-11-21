@@ -19,7 +19,7 @@
                 Products
               </li>
                <li class="breadcrumb-item active">
-                Add
+                Edit
               </li>
             </ol>
           </div>
@@ -38,12 +38,12 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  Add New Product
+                  Edit Product: {{ProductName}}
                 </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form>
+                    <form>
                 <div class="form-group mb-3">
                   <div class="row">
                     <div class="col-lg-3">
@@ -52,7 +52,7 @@
                       <img src="" alt="" width="200" height="150">
                       <br>
                       <!-- <input type="text" class="form-control" placeholder="ex. Air Jordan"> -->
-                       <button type="button" class="btn btn-primary mt-2" style="width:200px;">Add Image</button>
+                      <button type="button" class="btn btn-primary mt-2" style="width:200px;">Update Image</button>
                     </div>
                     <div class="col-lg-8">
                       <label for="">More Images</label>
@@ -68,7 +68,7 @@
                       <img src="" alt="" width="100" height="80" class="mb-1">
                       <img src="" alt="" width="100" height="80" class="mb-1">
                        <br>
-                      <button type="button" class="btn btn-primary w-50 mt-2">Add More Images</button>
+                      <button type="button" class="btn btn-primary w-50 mt-2">Add More Image</button>
                     </div>
                   </div>
 
@@ -96,8 +96,8 @@
                   </select>
                </div>
                <div class="form-group mb-3">
-                  <button type="button" class="btn btn-primary w-25">Save</button>
-                  <button type="button" class="btn btn-danger w-25">Cancel</button>
+                  <button type="button" class="btn btn-warning w-25">Update</button>
+                  <button type="button" class="btn btn-light w-25">Cancel</button>
                </div>
                </form>
               </div>
@@ -116,6 +116,11 @@
   import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
   export default {
     layout: 'adminLte',
+    data() {
+      return {
+        ProductName:""
+      }
+    },
     components: {},
     computed: {
       ...mapGetters({
