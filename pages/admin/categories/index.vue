@@ -51,8 +51,10 @@
                   <tbody>
                     <tr v-for="(item, index) in categories" :key="index">
                       <td>{{item.id}}</td>
-                      <td>{{item.name}}</td>
-                      <td><button class="btn btn-warning  btn-sm">edit</button></td>
+                      <td>{{item.category_name}}</td>
+                      <td>
+                         <NuxtLink class="btn btn-warning  btn-sm" :to="'/admin/categories/edit/'+item.id">Edit</NuxtLink>
+                       </td>
                     </tr>
                   </tbody>
                   <tfoot>
@@ -79,25 +81,15 @@
   import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
   export default {
     layout: 'adminLte',
-    components: {},
     computed: {
-      ...mapGetters({
-        products: 'products/getProducts'
+      ...mapState({
+            categories: state => state.categories.categories
       }),
     },
     methods: {
-      ...mapActions({
-        getProducts: "products/retrieveProducts",
-      }),
       addNewCategory(){
-        this.$router.push('/admin/categories/add')
-      },
-      dashboard(){
-        this.$router.push('/admin')
+       this.$router.push('/admin/categories/add')
       }
-    },
-    created() {
-      this.getProducts();
     },
     mounted() {
       $(document).ready( function () {

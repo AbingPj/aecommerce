@@ -17,17 +17,12 @@ export const mutations = {
 };
 
 export const actions = {
-  retrieveProducts({ commit }) {
-    return new Promise((resolve, reject) => {
-      this.$axios.get('/api/store/products')
-        .then(res => {
-          let products = res.data.data;
-          commit('SET_PRODUCTS', products);
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
+  async addProduct({dispatch,commit}, data) {
+   const res = await this.$axios.$post('/api/admin/addProduct', data);
+   dispatch('retrieveProducts')
+ },
+  async retrieveProducts({ commit }) {
+    const data = await this.$axios.$get('/api/admin/products');
+    commit('SET_PRODUCTS', data);
   },
 };

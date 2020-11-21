@@ -38,7 +38,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  Add New Product
+                  Edit Product:
                 </h3>
               </div>
               <!-- /.card-header -->

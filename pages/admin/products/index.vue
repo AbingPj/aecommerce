@@ -40,7 +40,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="products" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>Id</th>
@@ -62,7 +62,9 @@
                       <td>{{item.unit}}</td>
                       <td>{{item.category.category_name}}</td>
                       <td>{{item.product_status}}</td>
-                      <td><button class="btn btn-warning  btn-sm">edit</button></td>
+                      <td>
+                         <NuxtLink class="btn btn-warning  btn-sm" :to="'/admin/products/edit/'+item.id">Edit</NuxtLink>
+                        </td>
                     </tr>
                   </tbody>
                   <tfoot>
@@ -96,14 +98,14 @@
     layout: 'adminLte',
     components: {},
     computed: {
-      ...mapGetters({
-        products: 'products/getProducts'
+      ...mapState({
+            products: state => state.products.products
       }),
+      // ...mapGetters({
+      //   products: 'products/getProducts'
+      // }),
     },
     methods: {
-      ...mapActions({
-        getProducts: "products/retrieveProducts",
-      }),
       addNewProduct(){
         this.$router.push('/admin/products/add')
       },
@@ -111,12 +113,9 @@
         this.$router.push('/admin')
       }
     },
-    created() {
-      this.getProducts();
-    },
     mounted() {
       $(document).ready( function () {
-          $('#example1').DataTable();
+          $('#products').DataTable();
       });
     }
   }

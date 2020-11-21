@@ -58,7 +58,6 @@ export default {
         ...mapActions({
           vuexlogout: "auth/logout",
           getIsLogin: "auth/getIsLogin",
-          getProducts: "auth/getProducts",
         }),
         home()
         {

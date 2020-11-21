@@ -38,7 +38,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  Edit Category: {{CategoryName}}
+                  Edits Category: {{CategoryName}}
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -73,9 +73,24 @@
         CategoryName:""
       }
     },
+    methods: {
+      ...mapActions({
+        addCategory: "categories/addCategory",
+      }),
+      addNewCategory() {
+        this.addCategory()
+            .then((res) => {
+              //  console.log(res.data);
+               this.$router.push('/admin')
+            })
+            .catch((err) => {
+               console.log(err);
+            });
+      },
+    },
     mounted() {
       // this.getProducts();
-      $('#example1').DataTable();
+      $('#products').DataTable();
     }
   }
 </script>

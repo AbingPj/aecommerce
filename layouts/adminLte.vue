@@ -18,12 +18,14 @@ export default {
     NavBar, SideBar, Footer
   },
   created() {
-    //  this.vuexproducts();
+    this.getCategories();
+    this.getProducts();
   },
   methods: {
         ...mapActions({
           vuexlogout: "auth/logout",
-          // vuexproducts: "products/retrieveProducts",
+          getCategories: "categories/retrieveCategories",
+          getProducts: "products/retrieveProducts",
         }),
         home(){
            this.$router.push('/')

@@ -45,6 +45,7 @@ export default {
       { src: '/plugins/toastr/toastr.min.js', body: true },
       { src: '/plugins/datatables/jquery.dataTables.min.js', body: true },
       { src: '/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js', body: true },
+      // { src: '/dist/js/datatablesSetUp.js', body: true },
     ],
     bodyAttrs: {
       class: 'hold-transition sidebar-mini layout-fixed'
