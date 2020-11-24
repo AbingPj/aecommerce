@@ -83,7 +83,7 @@
     layout: 'adminLte',
     computed: {
       ...mapState({
-            categories: state => state.categories.categories
+            categories: state => state.admin.categories.categories
       }),
     },
     methods: {

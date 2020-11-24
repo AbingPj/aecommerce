@@ -56,7 +56,6 @@
                          <input
                     type="file"
                     ref="image_file_input"
-
                     @change="onFileChange"
                     class="d-none"
                   />
@@ -82,19 +81,19 @@
                   </div>
                   <div class="form-group mb-3">
                     <label for="">Product Name</label>
-                    <input v-model="name" type="text" class="form-control" placeholder="ex. Air Jordan">
+                    <input v-model="form.name" type="text" class="form-control" placeholder="ex. Air Jordan">
                   </div>
                   <div class="form-group mb-3">
                     <label for="">Description</label>
-                    <textarea class="form-control" placeholder=""></textarea>
+                    <textarea v-model="form.description" class="form-control" placeholder=""></textarea>
                   </div>
                   <div class="form-group mb-3">
                     <label for="">Price</label>
-                    <input v-model="price" type="text" class="form-control" placeholder="ex. 1999.99">
+                    <input v-model="form.price" type="text" class="form-control" placeholder="ex. 1999.99">
                   </div>
                   <div class="form-group mb-3">
                     <label for="">Unit</label>
-                    <input v-model="unit" type="text" class="form-control" placeholder="ex. pair">
+                    <input v-model="form.unit" type="text" class="form-control" placeholder="ex. pair">
                   </div>
                   <div class="form-group mb-3">
                     <label for="">Category</label>
@@ -135,18 +134,19 @@
           unit: null,
           image: null,
           category_id: null,
-          image:null
+          image:null,
+          description: null
         }
       }
     },
     computed: {
       ...mapState({
-        categories: state => state.categories.categories
+        categories: state => state.admin.categories.categories
       }),
     },
     methods: {
       ...mapActions({
-        addProduct: "products/addProduct",
+        addProduct: "admin/products/addProduct",
       }),
       onFileChange(e) {
 
@@ -163,6 +163,7 @@
         this.addProduct(formData)
           .then(res => {
             toastr.success('Added!')
+            this.$router.push('/admin/products')
           })
           .catch(err => {
             toastr.error('Fail to Save')

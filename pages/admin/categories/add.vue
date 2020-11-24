@@ -75,7 +75,7 @@
     },
     methods: {
       ...mapActions({
-        addCategory: "categories/addCategory",
+        addCategory: "admin/categories/addCategory",
       }),
         addNewCategory() {
           console.log(this.name)

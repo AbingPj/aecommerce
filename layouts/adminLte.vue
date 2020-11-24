@@ -24,8 +24,8 @@ export default {
   methods: {
         ...mapActions({
           vuexlogout: "auth/logout",
-          getCategories: "categories/retrieveCategories",
-          getProducts: "products/retrieveProducts",
+          getCategories: "admin/categories/retrieveCategories",
+          getProducts: "admin/products/retrieveProducts",
         }),
         home(){
            this.$router.push('/')

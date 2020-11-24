@@ -44,7 +44,7 @@
 <script>
   import { mapGetters, mapActions, mapState, mapMutations } from 'vuex';
   export default {
-    layout:'customer',
+    layout:'',
     data() {
       return {
         form: {

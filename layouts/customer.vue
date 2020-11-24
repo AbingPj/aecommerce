@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -35,7 +35,13 @@
     </ul>
   </div>
 </nav>
-    <nuxt />
+    <Nuxt/>
+
+  <!-- <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright © Your Website 2020</p>
+    </div>
+  </footer> -->
   </div>
 </template>
 <script>
@@ -91,4 +97,10 @@ export default {
 }
 </script>
 <style>
+.footer-fixed{
+position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+}
 </style>

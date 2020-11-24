@@ -99,7 +99,7 @@
     components: {},
     computed: {
       ...mapState({
-            products: state => state.products.products
+            products: state => state.admin.products.products
       }),
       // ...mapGetters({
       //   products: 'products/getProducts'
