@@ -22,7 +22,7 @@ export const actions = {
    dispatch('retrieveProducts')
  },
   async retrieveProducts({ commit }) {
-    const data = await this.$axios.$get('/api/admin/products');
+    const data = await this.$axios.$get('/api/products');
     commit('SET_PRODUCTS', data);
   },
 };
