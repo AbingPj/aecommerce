@@ -10,7 +10,7 @@
                   <div class="m-1 p-2">
                   Categories:
                 </div>
-                  <button @click="searchCategory(item)" v-for="(item, index) in categories.categories" :key="index" class="btn btn-light btn-sm m-1">
+                  <button @click="searchCategory(item)" v-for="(item, index) in categories" :key="index" class="btn btn-light btn-sm m-1">
                     {{item.category_name}}
                 </button>
                 </div>
@@ -80,14 +80,14 @@
               <h4 class="card-title"><a href="#">{{item.product_name}}</a></h4> <br>
               <h5>₱ {{item.price}} / {{item.unit}}</h5>
               <h6><a href="#">{{item.category.category_name}}</a></h6>
-              <p class="card-text" style="height:50px; overflow: hidden; text-overflow: ellipsis;">{{item.description}}
+              <p class="card-text">{{item.description}}
               </p>
             </div>
             <div class="card-footer ">
               <div class="d-flex">
                 <div class="w-50"> <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small></div>
                 <div class="w-50 text-right">
-                  <button class="btn btn-info"> Add to cart</button>
+                    <NuxtLink class="btn btn-info" :to="'/products/'+item.id"> Add to cart</NuxtLink>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@
     computed: {
       ...mapState({
         products: state => state.products.products,
-        categories: state => state.admin.categories
+        categories: state => state.products.categories
       }),
 
     },
@@ -123,7 +123,7 @@
     methods: {
       ...mapActions({
         getProducts: "products/retrieveProducts",
-        getCategories: "admin/categories/retrieveCategories",
+        getCategories: "products/retrieveCategories",
       }),
       dashboard() {
         this.$router.push('/admin')
@@ -138,6 +138,12 @@
     created() {
       this.getProducts();
       this.getCategories();
+
+
+      //  formData.append(
+      //     "selected_products",
+      //     JSON.stringify(this.selectedProducts)
+      //   );
     },
   }
 </script>
