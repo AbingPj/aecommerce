@@ -17,6 +17,10 @@
     </ul>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
+          <NuxtLink class="nav-link"  v-if="isLogin" to="/cart"><i class="fas fa-shopping-cart"></i> </NuxtLink>
+
+      </li>
+      <li class="nav-item">
         <a class="nav-link" v-if="isLogin" @click="profile()">Profile</a>
       </li>
       <li class="nav-item">
@@ -24,13 +28,14 @@
         <!-- <a class="nav-link " @click="admin()" >Administrator</a> -->
       </li>
        <li class="nav-item">
-        <button v-if="!isLogin" @click="login()" class="btn btn-primary mr-2">Login</button>
+        <button v-if="!isLogin" @click="login()" class="btn btn-sm btn-primary mr-2">Login</button>
       </li>
        <li class="nav-item">
-         <button v-if="!isLogin" @click="signup()" class="btn btn-dark mr-2">Sign-up</button>
+         <button v-if="!isLogin" @click="signup()" class="btn btn-sm btn-dark mr-2">Sign-up</button>
       </li>
       <li class="nav-item">
-        <button v-if="isLogin" @click="logout()" class="btn btn-sm btn-danger mr-2">LOG OUT</button>
+        <a class="nav-link" @click="logout()"><i class="fas fa-sign-out-alt"></i></a>
+        <!-- <button v-if="isLogin" @click="logout()" class="btn btn-sm btn-danger mr-2">LOG OUT</button> -->
       </li>
     </ul>
   </div>
@@ -60,10 +65,14 @@ export default {
             getNum1Num2: 'auth/getNum1Num2'
         }),
     },
-  methods: {
+    mounted() {
+      this.getCartContent()
+    },
+        methods: {
         ...mapActions({
           vuexlogout: "auth/logout",
           getIsLogin: "auth/getIsLogin",
+          getCartContent: "cart/getCartContent",
         }),
         home()
         {

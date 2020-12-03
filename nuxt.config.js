@@ -84,7 +84,8 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'http://52.74.70.6:88/',
+    baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'http://52.74.70.6:88/',
     // credentials: true, // this says that in the request the httponly cookie should be sent
   },
 

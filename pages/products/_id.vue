@@ -34,16 +34,16 @@
                 <div class="">
                         <div class="input-group mb-3" style="width:130px;">
                       <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
+                        <button @click="sub()" class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
                       </div>
-                      <input type="text" class="form-control" value="1" >
+                      <input v-model="quantity" type="text" class="form-control" readonly>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
+                        <button @click="add()" class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
                       </div>
                       </div>
                 </div>
                 <div class="text-right ml-1">
-                    <NuxtLink class="btn btn-info" :to="''"> Add to cart</NuxtLink>
+                    <button @click="addToCart()" type="button" class="btn btn-info" :to="''"> Add to cart</button>
                 </div>
                 </div>
 
@@ -71,15 +71,36 @@
     },
     data() {
       return {
-        search:"",
-        searchName:"",
-        searchCategories:[]
+        quantity: 1
       }
     },
     methods: {
       ...mapActions({
         getProductDetails: "products/getProductDetails",
+        vxAddToCart: "cart/addToCart",
       }),
+      add(){
+        this.quantity = this.quantity  + 1;
+      },
+      sub(){
+        if(this.quantity > 1){
+           this.quantity = this.quantity  - 1;
+        }
+      },
+      addToCart(){
+        let body = {
+          quantity: this.quantity,
+          product_id: this.product.id
+        }
+        this.vxAddToCart(body)
+        .then(res => {
+          console.log(res)
+          this.$router.push('/cart')
+        })
+        .catch(err => {
+          console.error(err);
+        })
+      }
     },
     created() {
       this.getProductDetails(this.$route.params.id);

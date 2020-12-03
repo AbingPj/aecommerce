@@ -1,12 +1,12 @@
 <template>
   <div class="text-center">
     <h1>Landing Page</h1>
-    <button @click="products()" class="btn btn-success">Products</button>
+    <!-- <button @click="products()" class="btn btn-success">Products</button>
     <button v-if="isLogin" @click="profile()" class="btn btn-info">Profile</button>
     <button v-if="isAdmin" @click="admin()" class="btn btn-info">Administrator</button>
     <button v-if="!isLogin" @click="login()" class="btn btn-primary">Login</button>
     <button v-if="!isLogin" @click="signup()" class="btn btn-dark">Sign-up</button>
-    <button v-if="isLogin" @click="logout()" class="btn btn-danger">LOG OUT</button>
+    <button v-if="isLogin" @click="logout()" class="btn btn-danger">LOG OUT</button> -->
   </div>
 </template>
 
