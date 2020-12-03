@@ -113,7 +113,7 @@
         //   formData.append(key, this.form[key]);
         // }
        bodyFormData.append(
-          "cart",
+          "selectedProducts",
           JSON.stringify(this.cart)
         );
 
@@ -122,7 +122,13 @@
           })
           .catch(err => {
             console.error(err);
-          })
+		  })
+		
+		// this.$axios.post('https://cors-anywhere.herokuapp.com/http://127.0.0.1:8000/api/customer/checkOut',
+		// 	bodyFormData
+		// ).then((res)=>{
+		// 	console.log(res)
+		// })
 
       }
 		},
@@ -131,7 +137,6 @@
 		},
 	};
 </script>
-addToCart
 
 <style lang="css" scoped>
 	.filter-btn {

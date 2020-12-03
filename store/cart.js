@@ -27,8 +27,8 @@ export const actions = {
  },
 
  async checkout({dispatch,commit}, data) {
-  const res = await this.$axios.$post('/api/customer/addToCart', data);
-  dispatch('getCartContent')
+  const res = await this.$axios.$post('/api/customer/testing', data);
+  // dispatch('getCartContent')
 },
 
 };
