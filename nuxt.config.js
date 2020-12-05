@@ -25,7 +25,8 @@ export default {
       { rel: 'stylesheet', href: '/plugins/summernote/summernote-bs4.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700' },
       { rel: 'stylesheet', href: '/plugins/toastr/toastr.min.css'},
-      { rel: 'stylesheet', href: '/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'}
+      { rel: 'stylesheet', href: '/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'},
+      { rel: 'stylesheet', href: '/css/custome.css'}
     ],
     script: [
       { src: '/plugins/jquery/jquery.min.js', body: true },
@@ -63,6 +64,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/VuePlugins.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
