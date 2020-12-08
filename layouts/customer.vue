@@ -115,6 +115,7 @@
         this.isLoading = trueOrFalse;
       }
     },
+
 		computed: {
 			...mapState({
 				isLogin: (state) => state.auth.isLogin,
@@ -128,12 +129,16 @@
 		},
 		mounted() {
 			this.getCartContent();
-		},
+    },
+    created() {
+       this.vxGetOrders();
+    },
 		methods: {
 			...mapActions({
 				vuexlogout: "auth/logout",
 				getIsLogin: "auth/getIsLogin",
-				getCartContent: "cart/getCartContent",
+        getCartContent: "cart/getCartContent",
+        vxGetOrders: "orders/getOrders",
       }),
       orders() {
         this.$router.push("/orders");

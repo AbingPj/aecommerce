@@ -1,10 +1,20 @@
 <template>
 	<div class="container p-3">
+		<div class="row mt-2 mb-3">
+			<div class="col-12">
+				<h2>
+					<i class="fas fa-folder-open"></i>
+					<NuxtLink :to="'/orders'"> My Orders</NuxtLink> / id: #{{
+						selectedOrder.id
+					}}
+				</h2>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-8 border border-secondary">
 				<div class="p-2">
 					<div
-						v-for="(item, index) in cart"
+						v-for="(item, index) in order_details"
 						:key="index"
 						class="card"
 						style="height: 120px"
@@ -12,25 +22,20 @@
 						<div class="d-flex p-2">
 							<div class="m-1">
 								<img
-									:src="item.product.image_link"
+									:src="item.image_link"
 									style="width: 120px; height: 100px"
 								/>
 							</div>
 							<div class="m-1">
-								<h4>{{ item.product.product_name }}</h4>
+								<h4>{{ item.product_name }}</h4>
 								<h6>
-									₱ {{ item.product.price }} / {{ item.product.unit }}
+									₱ {{ addCommaAndTwoDecimalPlaces(item.price) }} /
+									{{ item.unit }}
 								</h6>
 								<div class="">
 									<div class="input-group mb-3" style="width: 100px">
 										<div class="input-group-prepend">
-											<button
-												@click="sub(item)"
-												class="btn btn-sm btn-outline-secondary"
-												type="button"
-											>
-												<i class="fas fa-minus"></i>
-											</button>
+											<label for="" class="mr-3">Qty: </label>
 										</div>
 										<input
 											v-model="item.quantity"
@@ -38,25 +43,10 @@
 											class="form-control form-control-sm"
 											readonly
 										/>
-										<div class="input-group-append">
-											<button
-												@click="add(item)"
-												class="btn btn-sm btn-outline-secondary"
-												type="button"
-											>
-												<i class="fas fa-plus"></i>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
 							<div class="ml-auto" style="width: 100px">
-								<button
-									class="btn btn-danger btn-sm"
-									style="position: absolute; top: 10px; right: 10px"
-								>
-									<i class="fas fa-trash-alt"></i> Remove
-								</button>
 								<div
 									class="font-size-20"
 									style="position: absolute; bottom: 10px; right: 10px"
@@ -71,10 +61,13 @@
 			<div class="col-md-4 border border-secondary">
 				<div style="min-height: 450px">
 					<h3 class="text-center p-4">Order Summary</h3>
+					<h4 class="pl-3">Order ID: #{{ selectedOrder.id }}</h4>
 					<div class="p-3">
 						<div class="d-flex">
 							<div class="w-50">Total Order Amount</div>
-							<div class="w-50 text-right">₱ {{this.addCommaAndTwoDecimalPlaces(total)}}</div>
+							<div class="w-50 text-right">
+								₱ {{ this.addCommaAndTwoDecimalPlaces(total) }}
+							</div>
 						</div>
 						<div class="d-flex">
 							<div class="w-50">Discount</div>
@@ -86,17 +79,17 @@
 								<b>Total</b>
 							</div>
 							<div class="w-50 text-right">
-								<b>₱ {{addCommaAndTwoDecimalPlaces(total)}}</b>
+								<b>₱ {{ addCommaAndTwoDecimalPlaces(total) }}</b>
 							</div>
 						</div>
 						<div class="text-center p-3">
-							<button
+							<!-- <button
 								@click="checkout()"
 								type="button"
 								class="btn btn-primary btn-block"
 							>
 								Check Out
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
@@ -114,32 +107,33 @@
 		components: {},
 		computed: {
 			...mapState({
-				cart: (state) => state.cart.cart,
-      }),
-      total(){
-        let total = 0;
-        this.cart.forEach(item => {
-           let subTotal = Number(item.product.price) * item.quantity;
-           total = total + subTotal;
-        });
-        return total;
-      }
+				selectedOrder: (state) => state.orders.selectedOrder,
+				order_details: (state) => state.orders.order_details,
+			}),
+			total() {
+				let total = 0;
+				this.order_details.forEach((item) => {
+					let subTotal = Number(item.price) * item.quantity;
+					total = total + subTotal;
+				});
+				return total;
+			},
 		},
 		data() {
-			return {
-			};
+			return {};
 		},
 		methods: {
 			...mapActions({
-				vxAddToCart: "cart/addToCart",
-				vxCheckout: "cart/checkout",
-				vxUpdateCart: "cart/updateCart",
-				vxRemoveItem: "cart/removeItem",
+				// vxAddToCart: "cart/addToCart",
+				// vxCheckout: "cart/checkout",
+				// vxUpdateCart: "cart/updateCart",
+				// vxRemoveItem: "cart/removeItem",
+				vxGetOrderDetails: "orders/getOrderDetails",
 			}),
 			subTotal(item) {
-        let total = Number(item.product.price) * item.quantity;
-        let value = this.addCommaAndTwoDecimalPlaces(total);
-        return value;
+				let total = Number(item.price) * item.quantity;
+				let value = this.addCommaAndTwoDecimalPlaces(total);
+				return value;
 			},
 			addCommaAndTwoDecimalPlaces(value) {
 				var n = parseFloat(value).toFixed(2);
@@ -149,53 +143,10 @@
 				});
 				return withCommas;
 			},
-			add(data) {
-				this.updateCart(data.id, data.quantity + 1);
-			},
-			sub(data) {
-				if (data.quantity > 1) {
-					this.updateCart(data.id, data.quantity - 1);
-				}
-      },
-      vxRemoveItem(data) {
-
-			},
-			updateCart(id, quantity) {
-				this.$events.fire("LoadingOverlay", true);
-				let data = {
-					cartContentId: id,
-					quantity: quantity,
-				};
-				this.vxUpdateCart(data)
-					.then((res) => {
-						console.log(res);
-						this.$events.fire("LoadingOverlay", false);
-					})
-					.catch((err) => {
-						console.log(err);
-						this.$events.fire("LoadingOverlay", false);
-					});
-			},
-
-			checkout() {
-				this.$events.fire("LoadingOverlay", true);
-				var bodyFormData = new FormData();
-				bodyFormData.append("selectedProducts", JSON.stringify(this.cart));
-				bodyFormData.append("total", this.total);
-
-				this.vxCheckout(bodyFormData)
-					.then((res) => {
-						console.log(res);
-						this.$events.fire("LoadingOverlay", false);
-					})
-					.catch((err) => {
-						console.error(err);
-						this.$events.fire("LoadingOverlay", false);
-					});
-			},
 		},
 		created() {
-			// this.getProductDetails(this.$route.params.id);
+			console.log("OYEEEEEEEEEEEEEEEEEEE");
+			this.vxGetOrderDetails(this.$route.params.id);
 		},
 	};
 </script>
