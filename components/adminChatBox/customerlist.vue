@@ -10,23 +10,26 @@
     >
       <div class="d-flex">
         <div class="mr-2" style="width: 50px;">
-          <img :src="item.image" style="width: 50px; height: 50px; border-radius: 50%;" />
+          <img :src="item.user.image_link" style="width: 50px; height: 50px; border-radius: 50%;" />
         </div>
         <div class="mr-2" style="width: 180px;">
-          <span>{{item.first_name + ' ' + item.last_name}}</span>
+          <span>{{item.user.name}}</span>
           <br />
-          <div
+          <!-- <div
             v-if="item.content"
             style="margin:0px; padding:0px; white-space: nowrap; width: 150px; overflow: hidden; text-overflow: ellipsis; "
           >{{item.content}}</div>
           <div
             v-else
             style="margin:0px; padding:0px; white-space: nowrap; width: 150px; overflow: hidden; text-overflow: ellipsis; "
+          >No Chat Message Yet</div> -->
+          <div
+            style="margin:0px; padding:0px; white-space: nowrap; width: 150px; overflow: hidden; text-overflow: ellipsis; "
           >No Chat Message Yet</div>
         </div>
         <div style="width: 20px;">
           <br />
-          <span v-if="item.admin_unviewed != 0" class="badge badge-danger">{{item.admin_unviewed}}</span>
+          <!-- <span v-if="item.admin_unviewed != 0" class="badge badge-danger">{{item.admin_unviewed}}</span> -->
         </div>
       </div>
       <div>
@@ -49,20 +52,20 @@ export default {
   },
   methods: {
     showChats(customer) {
-      LoadingOverlay();
-      axios
-        .get("/admin/chats/updateUnviewedChats/" + customer.id)
-        .then((res) => {
-          window.location.href = "/admin/chats/customer/" + customer.id;
-        });
+      // LoadingOverlay();
+      // axios
+      //   .get("/admin/chats/updateUnviewedChats/" + customer.id)
+      //   .then((res) => {
+      //     window.location.href = "/admin/chats/customer/" + customer.id;
+      //   });
     },
     getMoment(time) {
       var a = moment(time);
       return moment(a).fromNow();
     },
     getCustomer() {
-      axios
-        .get("/admin/chats/getCustomers")
+      this.$axios
+        .get("/api/admin/getAllMessagesAdmin")
         .then((res) => {
           this.customers = res.data;
         })

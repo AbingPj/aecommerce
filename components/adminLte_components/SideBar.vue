@@ -68,6 +68,14 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a @click="chat()" class="nav-link">
+            <i class="nav-icon fas fa-th" />
+              <p>
+                Chat
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a @click="logout()" class="nav-link">
               <i class="fas fa-sign-out-alt nav-icon"></i>
@@ -101,6 +109,9 @@ export default {
         },
         customers(){
           this.$parent.customers()
+        },
+        chat(){
+          this.$parent.chat();
         },
         logout(){
           this.$parent.logout()

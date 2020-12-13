@@ -91,15 +91,19 @@
       <p class="m-0 text-center text-white">Copyright © Your Website 2020</p>
     </div>
   </footer> -->
+  <ChatBox v-if="isLogin && !isAdmin"></ChatBox>
 	</div>
 </template>
 <script>
 	import Loading from "vue-loading-overlay";
 	import "vue-loading-overlay/dist/vue-loading.css";
 	import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
+  import ChatBox from '../components/ChatBox.vue'
+
 	export default {
 		components: {
-			Loading,
+      Loading,
+      ChatBox,
     },
     data() {
       return {
@@ -115,6 +119,7 @@
         this.isLoading = trueOrFalse;
       }
     },
+
 		computed: {
 			...mapState({
 				isLogin: (state) => state.auth.isLogin,
@@ -128,12 +133,16 @@
 		},
 		mounted() {
 			this.getCartContent();
-		},
+    },
+    created() {
+       this.vxGetOrders();
+    },
 		methods: {
 			...mapActions({
 				vuexlogout: "auth/logout",
 				getIsLogin: "auth/getIsLogin",
-				getCartContent: "cart/getCartContent",
+        getCartContent: "cart/getCartContent",
+        vxGetOrders: "orders/getOrders",
       }),
       orders() {
         this.$router.push("/orders");

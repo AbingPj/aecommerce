@@ -17,7 +17,12 @@
     "nuxt": "^2.14.6",
     "vue-events": "^3.1.0",
     "vue-loading-overlay": "^3.4.2",
+    "vue-quick-chat": "^1.2.6",
     "vue2-datepicker": "^3.8.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0"
+  }
 }

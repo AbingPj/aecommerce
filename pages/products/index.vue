@@ -78,7 +78,7 @@
             </div>
             <div class="card-body">
               <h4 class="card-title"><a href="#">{{item.product_name}}</a></h4> <br>
-              <h5>₱ {{item.price}} / {{item.unit}}</h5>
+              <h5>₱ {{addCommaAndTwoDecimalPlaces(item.price)}} / {{item.unit}}</h5>
               <h6><a href="#">{{item.category.category_name}}</a></h6>
               <p class="card-text">{{item.description}}
               </p>
@@ -125,6 +125,14 @@
         getProducts: "products/retrieveProducts",
         getCategories: "products/retrieveCategories",
       }),
+      addCommaAndTwoDecimalPlaces(value) {
+				var n = parseFloat(value).toFixed(2);
+				var withCommas = Number(n).toLocaleString("en", {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				});
+				return withCommas;
+			},
       dashboard() {
         this.$router.push('/admin')
       },

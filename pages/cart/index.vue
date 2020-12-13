@@ -30,7 +30,8 @@
 									₱ {{ item.product.price }} / {{ item.product.unit }}
 								</h6>
 								<div class="">
-									<div class="input-group mb-3" style="width: 100px">
+									<div class="input-group mb-3" style="width: 150px">
+                    <label for="" class="mr-3">Qty: </label>
 										<div class="input-group-prepend">
 											<button
 												@click="sub(item)"
@@ -62,6 +63,7 @@
 								<button
 									class="btn btn-danger btn-sm"
 									style="position: absolute; top: 10px; right: 10px"
+                  @click="removeItem(item.id)"
 								>
 									<i class="fas fa-trash-alt"></i> Remove
 								</button>
@@ -165,8 +167,17 @@
 					this.updateCart(data.id, data.quantity - 1);
 				}
       },
-      vxRemoveItem(data) {
-
+      removeItem(id) {
+        this.$events.fire("LoadingOverlay", true);
+        this.vxRemoveItem(id)
+          .then((res) => {
+						console.log(res);
+						this.$events.fire("LoadingOverlay", false);
+					})
+					.catch((err) => {
+						console.log(err);
+						this.$events.fire("LoadingOverlay", false);
+					});
 			},
 			updateCart(id, quantity) {
 				this.$events.fire("LoadingOverlay", true);
@@ -193,8 +204,9 @@
 
 				this.vxCheckout(bodyFormData)
 					.then((res) => {
-						console.log(res);
-						this.$events.fire("LoadingOverlay", false);
+            console.log(res);
+            this.$events.fire("LoadingOverlay", false);
+            this.$router.push("/orders");
 					})
 					.catch((err) => {
 						console.error(err);

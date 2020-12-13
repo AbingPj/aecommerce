@@ -31,14 +31,15 @@ export const actions = {
     const res = await this.$axios.$post('/api/customer/updateCart', data);
     dispatch('getCartContent')
   },
-  async removeItem({ dispatch, commit }, data) {
-    // const res = await this.$axios.$post('/api/customer/', data);
-    // dispatch('getCartContent')
+  async removeItem({ dispatch, commit }, id) {
+    const res = await this.$axios.$delete('/api/customer/removeCartContent?id='+id);
+    dispatch('getCartContent')
   },
   async checkout({ dispatch, commit }, data) {
     const res = await this.$axios.$post('/api/customer/checkOut', data);
     dispatch('getCartContent')
     // dispatch('getCartContent')
   },
+
 
 };
