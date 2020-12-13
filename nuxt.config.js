@@ -60,6 +60,7 @@ export default {
 
    // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+    '~assets/scss/colors.scss'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -81,8 +82,12 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     // 'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+    scss: ['./assets/scss/*.scss']
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
