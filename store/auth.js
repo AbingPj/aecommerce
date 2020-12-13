@@ -1,6 +1,7 @@
 import cookies from 'js-cookie';
 
 export const state = () => ({
+  me:{},
   token: null,
   role_id: null,
   isLogin: false,
@@ -21,6 +22,10 @@ export const getters = {
 };
 
 export const mutations = {
+  SET_DATA(state, data) {
+    state.me = data;
+  },
+
   SET_TOKEN(state, token) {
     state.token = token;
   },
@@ -60,6 +65,7 @@ export const actions = {
           let token = res.data.data.token;
           // console.log(token);
           dispatch('setToken', {token});
+          dispatch('me', {token});
           commit('SET_ROLE_ID', res.data.data.role_id);
           commit('SET_LOGIN_IN');
           resolve(res)
@@ -68,6 +74,10 @@ export const actions = {
           reject(err)
         })
     })
+  },
+  async me({commit}, {token}) {
+    const res = await this.$axios.$get('/api/me');
+    commit('SET_DATA', res);
   },
   logout({commit}) {
     console.log('logout')
@@ -84,6 +94,8 @@ export const actions = {
     cookies.set('x-access-role_id', token, {expires: expiryTime});
     commit('SET_TOKEN', token);
     const res = await this.$axios.$get('/api/me');
+    console.log('me');
+    commit('SET_DATA', res);
     commit('SET_ROLE_ID', res.role_id);
     commit('SET_LOGIN_IN');
   },

@@ -12,7 +12,7 @@
 <template>
   <div>
     <Chat
-      :style="'height:400px;'"
+      :style="'height:500px;'"
       v-if="visible"
       :participants="participants"
       :myself="myself"
@@ -45,6 +45,7 @@
 <script>
 import { Chat } from "vue-quick-chat";
 import "vue-quick-chat/dist/vue-quick-chat.css";
+	import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   props: ["propscustomer"],
@@ -52,29 +53,14 @@ export default {
     Chat,
   },
   created() {
-    this.toLoadMethods();
-    this.myself = {
-      name: "Sunfarmacy Admin",
-      id: 1,
-      profilePicture: "/img/backend/brand/logo.png",
-    };
-
-    this.participants = [
-      {
-        name: this.propscustomer.full_name,
-        id: this.propscustomer.id,
-        profilePicture: this.propscustomer.atr_image_link,
-      },
-    ];
-
-    this.chatTitle = this.propscustomer.full_name;
+   this.toLoadMethods(2)
   },
 
   data() {
     return {
       badge: 0,
       submitImageIconSize: 20,
-      visible: false,
+      visible: true,
       participants: [],
       myself: {},
       messages: [],
@@ -171,12 +157,33 @@ export default {
     };
   },
   methods: {
-    async toLoadMethods() {
-      const { data, status } = await axios.get(
-        "/admin/chats/getchats/" + this.propscustomer.id
+    async toLoadMethods(id) {
+      // this.toLoadMethods();
+    this.myself = {
+      name: "Ecommerce Admin",
+      id: 1,
+      profilePicture: "https://scontent.fdvo1-1.fna.fbcdn.net/v/t1.0-1/cp0/p60x60/126054895_5312467295445713_6099327690351717172_n.jpg?_nc_cat=103&ccb=2&_nc_sid=7206a8&_nc_eui2=AeEqEe4xAl3t8JlrmQzRlRpor9H7MewC3Yyv0fsx7ALdjEAyf9tT2R4mnXuoGx3b50n_u5hRNZxItjfuaiXIebBc&_nc_ohc=5XrF846YmswAX-DmqIH&_nc_ht=scontent.fdvo1-1.fna&tp=27&oh=b00df20cd5c8536a897a23165eb9b2df&oe=5FFD0E26",
+    };
+
+    this.participants = [
+      {
+        name: 'Abing Pj',
+        id: 2,
+        profilePicture: 'https://scontent.fdvo1-1.fna.fbcdn.net/v/t1.0-1/cp0/p40x40/126326562_4039564656071510_7254034202060587001_n.jpg?_nc_cat=106&ccb=2&_nc_sid=dbb9e7&_nc_eui2=AeGGO6PGPiLo1w_dgxa0M2l6hKGDY4A7IPKEoYNjgDsg8v70DXrPcipBbAWbPKPguvTnxIMmpIotx-vtP6dkMZiy&_nc_ohc=nxpgiY6S2HoAX9923jw&_nc_ht=scontent.fdvo1-1.fna&tp=27&oh=2d73c31a46e74746709f7688eb5f307a&oe=5FFC3DDC',
+      },
+    ];
+
+    this.chatTitle = 'Abing Pj';
+
+    console.log('getMessageCustomer')
+
+      const { data, status } = await this.$axios.get(
+        "/api/admin/getMessageAdmin?reciever_id=" + id
       );
+       console.log(data);
       if (data && status == 200) {
-        this.toLoad = data;
+        this.messages = data;
+        // this.loadMoreMessages(data)
         this.visible = true;
       } else {
         alert("Something went wrong! Try reloading the page.");
@@ -184,7 +191,7 @@ export default {
     },
 
     getUnviewedChats() {
-      axios
+      this.$axios
         .get("/getunviewdchats")
         .then((res) => {
           this.badge = res.data;
@@ -196,14 +203,14 @@ export default {
 
     visibleToTrue() {
       this.visible = true;
-      axios
-        .post("/updateUnviewedChats")
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      // this.$axios
+      //   .post("/updateUnviewedChats")
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
     },
     onType: function (event) {
       //here you can set any behavior
@@ -224,52 +231,33 @@ export default {
        * yet to the server you have to add the message into the array
        */
       this.messages.push(message);
+      message.reciever_id = 2;
+      // let data = {
+      //   message: message,
+      //   reciever_id: 2,
+      // };
 
-      let data = {
-        message: message,
-        to_user_id: this.propscustomer.id,
-      };
+      	this.$axios
+				  .post("/api/admin/sendChatAdmin", message)
+				  .then((res) => {
+				    if (res.data == "success") {
+				      setTimeout(() => {
+                message.uploaded = true;
+                this.updateCustomerList();
+				      }, 1000);
+				    }
+				  })
+				  .catch((err) => {
+				    console.error(err);
+				  });
 
-      axios
-        .post("/admin/chats/submit", data)
-        .then((res) => {
-          if (res.data == "success") {
-            setTimeout(() => {
-              message.uploaded = true;
-              this.updateCustomerList();
-            }, 1000);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      /*
-       * you can update message state after the server response
-       */
-      //   // timeout simulating the request
-      //   setTimeout(() => {
-      //     message.uploaded = true;
-      //   }, 1000);
-
-      //   axios
-      //     .post("/submitchat", message)
-      //     .then((res) => {
-      //       if (res.data == "success") {
-      //         setTimeout(() => {
-      //           message.uploaded = true;
-      //         }, 1000);
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.error(err);
-      //     });
     },
     updateCustomerList() {
-      this.$events.fire("updateCustomerList", "update customer list");
+      // this.$events.fire("updateCustomerList", "update customer list");
     },
     onClose() {
       this.visible = false;
-      this.getUnviewedChats();
+      // this.getUnviewedChats();
     },
     onImageSelected(files, message) {
       let src =
@@ -299,13 +287,16 @@ export default {
   },
 
   computed: {
-    chat_badge() {
-      var badge = "";
-      if (this.badge != 0) {
-        badge = this.badge;
-      }
-      return badge;
-    },
+    	...mapState({
+				me: (state) => state.auth.me,
+			}),
+    // chat_badge() {
+    //   var badge = "";
+    //   if (this.badge != 0) {
+    //     badge = this.badge;
+    //   }
+    //   return badge;
+    // },
   },
 };
 </script>

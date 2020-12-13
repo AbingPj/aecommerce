@@ -42,6 +42,9 @@ export default {
         customers(){
            this.$router.push('/admin/customers')
         },
+        chat(){
+           this.$router.push('/admin/chat')
+        },
         logout(){
             this.vuexlogout('vuexlogout');
             this.$router.push('/')
