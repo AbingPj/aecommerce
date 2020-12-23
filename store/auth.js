@@ -79,6 +79,10 @@ export const actions = {
     const res = await this.$axios.$get('/api/me');
     commit('SET_DATA', res);
   },
+  async me2({commit}) {
+    const res = await this.$axios.$get('/api/me');
+    commit('SET_DATA', res);
+  },
   logout({commit}) {
     console.log('logout')
     this.$axios.setToken(false);

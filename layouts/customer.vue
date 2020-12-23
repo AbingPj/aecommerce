@@ -1,13 +1,14 @@
 <template>
 	<div>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <Loading :active.sync="isLoading"
-        :can-cancel="false"
-        :is-full-page="fullPage"
-        :color="LoadingColor"
-        :height="height"
-        :width="width"
-        ></Loading>
+			<Loading
+				:active.sync="isLoading"
+				:can-cancel="false"
+				:is-full-page="fullPage"
+				:color="LoadingColor"
+				:height="height"
+				:width="width"
+			></Loading>
 			<button
 				class="navbar-toggler"
 				type="button"
@@ -46,7 +47,7 @@
 							>Profile</a
 						>
 					</li>
-          <li class="nav-item">
+					<li class="nav-item">
 						<a class="nav-link" v-if="isLogin" @click="orders()"
 							>My Orders</a
 						>
@@ -91,34 +92,35 @@
       <p class="m-0 text-center text-white">Copyright © Your Website 2020</p>
     </div>
   </footer> -->
-  <ChatBox v-if="isLogin && !isAdmin"></ChatBox>
+		<ChatBox v-if="isLogin && !isAdmin"></ChatBox>
 	</div>
 </template>
 <script>
 	import Loading from "vue-loading-overlay";
 	import "vue-loading-overlay/dist/vue-loading.css";
 	import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
-  import ChatBox from '../components/ChatBox.vue'
+	import ChatBox from "../components/ChatBox.vue";
 
 	export default {
 		components: {
-      Loading,
-      ChatBox,
-    },
-    data() {
-      return {
-        isLoading: false,
-        fullPage: true,
-        LoadingColor: '#1e87f0',
-        height: 128,
-        width: 128,
-      }
-    },
-    events: {
-      LoadingOverlay(trueOrFalse){ //this.$events.fire("LoadingOverlay", "to");
-        this.isLoading = trueOrFalse;
-      }
-    },
+			Loading,
+			ChatBox,
+		},
+		data() {
+			return {
+				isLoading: false,
+				fullPage: true,
+				LoadingColor: "#1e87f0",
+				height: 128,
+				width: 128,
+			};
+		},
+		events: {
+			LoadingOverlay(trueOrFalse) {
+				//this.$events.fire("LoadingOverlay", "to");
+				this.isLoading = trueOrFalse;
+			},
+		},
 
 		computed: {
 			...mapState({
@@ -132,21 +134,25 @@
 			}),
 		},
 		mounted() {
-			this.getCartContent();
-    },
-    created() {
-       this.vxGetOrders();
-    },
+			if (this.isLogin) {
+				this.getCartContent();
+			}
+		},
+		created() {
+			if (this.isLogin) {
+				this.vxGetOrders();
+			}
+		},
 		methods: {
 			...mapActions({
 				vuexlogout: "auth/logout",
 				getIsLogin: "auth/getIsLogin",
-        getCartContent: "cart/getCartContent",
-        vxGetOrders: "orders/getOrders",
-      }),
-      orders() {
-        this.$router.push("/orders");
-      },
+				getCartContent: "cart/getCartContent",
+				vxGetOrders: "orders/getOrders",
+			}),
+			orders() {
+				this.$router.push("/orders");
+			},
 			home() {
 				this.$router.push("/");
 			},
